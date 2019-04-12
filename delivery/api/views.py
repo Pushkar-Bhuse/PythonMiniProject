@@ -7,8 +7,10 @@ from datetime import datetime
 from rest_framework import generics
 from delivery.models import Order,Product,OrderItem
 from .serializers import OrderSerializer, ProductSerializer,OrderItemSerializer
+from rest_framework.renderers import TemplateHTMLRenderer
 from django.http import JsonResponse
 from django.contrib.auth import get_user_model
+from .api.location import *
 
 user = get_user_model()
 
@@ -58,7 +60,10 @@ class AddToCart(APIView):
         return JsonResponse({'success':True})
 
 
-# class CheckOut(APIView):
-#     def post(self, request, *args, *kwargs):
+ class DeliveryConfirmation(APIView):
+     def post(self, request, *args, *kwargs):
+         refcode = tweet_id = self.kwargs.get("ref_code")
+
+
 
 
