@@ -1,0 +1,4 @@
+{% for branch in branches %}
+<a href="{% url 'book' place=branch.id %}">{{ branch.name }}<a>
+<br>
+{% endfor %}
