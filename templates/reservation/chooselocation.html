@@ -1,4 +1,4 @@
 {% for branch in branches %}
-<a href="{% url 'book' place=branch.id %}">{{ branch.name }}<a>
+<a href="{% url 'reservation:book' place=branch.id %}">{{ branch.name }}<a>
 <br>
 {% endfor %}

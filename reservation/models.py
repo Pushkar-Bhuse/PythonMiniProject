@@ -2,7 +2,7 @@ from django.db import models
 from django.conf import settings
 from phonenumber_field.modelfields import PhoneNumberField
 import googlemaps
-gmaps = googlemaps.Client(key='')
+# gmaps = googlemaps.Client(key='')
 # from delivery.api.location import get_lat_lon
 
 
@@ -14,13 +14,13 @@ class Branch(models.Model):
     lat = models.IntegerField(null = True, blank=True)
     lon = models.IntegerField(null = True, blank=True)
 
-    def create(self):
-        address = self.street + ", " + self.city + ", " + self.state
-        geocode_result = gmaps.geocode(address)
-        lat = geocode_result[0]['geometry']['location']['lat']
-        lon = geocode_result[0]['geometry']['location']['lng']
-        self.lat = lat
-        self.lon = lon
+    # def create(self):
+    #     address = self.street + ", " + self.city + ", " + self.state
+    #     geocode_result = gmaps.geocode(address)
+    #     lat = geocode_result[0]['geometry']['location']['lat']
+    #     lon = geocode_result[0]['geometry']['location']['lng']
+    #     self.lat = lat
+    #     self.lon = lon
 
     def __unicode__(self):
         return self.name
