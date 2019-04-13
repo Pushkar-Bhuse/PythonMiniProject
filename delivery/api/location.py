@@ -1,7 +1,8 @@
-import googlemaps
 from reservation.models import Branch
+import googlemaps
 
-gmaps = googlemaps.Client(key='AIzaSyBgrLgIKh5eh3TBIKuDVif9vnOjIANbstQ')
+
+gmaps = googlemaps.Client(key='')
 
 def get_traveltime(start, end):
     my_dist = gmaps.distance_matrix(start,end)['rows'][0]['elements'][0]

@@ -1,0 +1,72 @@
+{% load static %}
+<h1>Cart</h1>
+{% for product in products %}
+<div id = "{{ product.id }}">
+<h3>{{ product.name }}</h3>
+{% if product.id in currentproducts %}
+<button class = "add" style="display: none">Add</button>
+<button class = "remove" style="display: inline">Remove</button>
+{% else %}
+<button class = "add" style="display: inline">Add</button>
+<button class = "remove" style="display: none">Remove</button>
+{% endif %}
+
+</div>
+<br>
+{% endfor %}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script>
+$(document).ready(function(){
+
+$(".add").click(function(){
+
+    $(this).hide();
+    $(this).siblings("button").show();
+    console.log($(this).parent("div").attr("id"));
+    var product = $(this).parent("div").attr("id");
+    $.ajax({
+    "url": "/api/add_to_cart/",
+    "type": "POST",
+    "data":{
+        "product" : product,
+        csrfmiddlewaretoken : "{{ csrf_token }}"
+        },
+    "success": function(data){
+            console.log("Adding worked")
+    },
+    "error": function(data){
+            console.log("Adding did not work");
+            console.log(data)
+    }
+
+    })
+})
+
+
+    $(".remove").click(function(){
+
+    $(this).hide();
+    $(this).siblings("button").show();
+    console.log($(this).parent("div").attr("id"));
+    var product = $(this).parent("div").attr("id");
+    $.ajax({
+    "url": "/api/remove_from_cart/",
+    "type": "POST",
+    "data":{
+        "product" : product,
+        csrfmiddlewaretoken : "{{ csrf_token }}"
+        },
+    "success": function(data){
+            console.log("Remmoving worked")
+    },
+    "error": function(data){
+            console.log("Removing did not work");
+            console.log(data)
+    }
+
+    })
+})
+
+})
+
+</script>

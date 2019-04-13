@@ -12,7 +12,7 @@ class Product(models.Model):
         return self.name
 
 class OrderItem(models.Model):
-    product = models.OneToOneField(Product, on_delete=models.SET_NULL, null=True)
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
     quantity = models.IntegerField(default=False)
     date_added = models.DateTimeField(auto_now=True)
     date_ordered = models.DateTimeField(null=True)

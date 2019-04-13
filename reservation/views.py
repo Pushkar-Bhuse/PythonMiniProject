@@ -1,10 +1,12 @@
 from django.shortcuts import render
-from django.db.models import Q
 from .forms import contactForm,ReservationForm
 from django.core.mail import send_mail
 from django.conf import settings
 from reservation.models import Reservation,Branch
+from delivery.models import *
 # from twilio.rest import Client
+
+
 
 def contact(request):
     title = "Contact"
@@ -69,7 +71,6 @@ def contact(request):
 
 
 def choose_and_book(request,place=1):
-
     # place = request.POST["place"]
     form = ReservationForm(request.POST or None)
     if form.is_valid():
@@ -94,18 +95,9 @@ def choose_and_book(request,place=1):
         return render(request,template,context)
 
     else:
-        # form = ReservationForm()
-        population = {}
-        # place = request.GET["place"]
-        for i in range(0,12):
-            count = Reservation.objects.filter(Q(time__hour__gte = i) & Q(time__hour__lte = i+1)).count()
-            if i==0:
-                slot = "{}:00 PM to {}:00 PM".format((12),(1))
-            else:
-                slot = "{}:00 PM to {}:00 PM".format((i),(i+1))
-            population[slot] = count
-
-        return render(request,'reservation/booking.html',{'form':form,'population':population})
+        # import pdb; pdb.set_trace()
+        form = ReservationForm()
+        return render(request,'reservation/booking.html',{'form':form, "place":place})
 
 
 
@@ -113,3 +105,5 @@ def choose_location(request):
     branches = Branch.objects.all()
     template = 'reservation/chooselocation.html'
     return render(request,template,{"branches":branches})
+
+

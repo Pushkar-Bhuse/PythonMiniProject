@@ -1,7 +1,9 @@
 from django.db import models
 from django.conf import settings
 from phonenumber_field.modelfields import PhoneNumberField
-from delivery.api.location import get_lat_lon
+import googlemaps
+gmaps = googlemaps.Client(key='')
+# from delivery.api.location import get_lat_lon
 
 
 class Branch(models.Model):
@@ -14,7 +16,9 @@ class Branch(models.Model):
 
     def create(self):
         address = self.street + ", " + self.city + ", " + self.state
-        lat,lon = get_lat_lon(address)
+        geocode_result = gmaps.geocode(address)
+        lat = geocode_result[0]['geometry']['location']['lat']
+        lon = geocode_result[0]['geometry']['location']['lng']
         self.lat = lat
         self.lon = lon
 
