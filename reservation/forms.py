@@ -1,6 +1,7 @@
 from django import forms
 from reservation.models import Reservation
 from django.contrib.admin import widgets
+from django.contrib.auth.models import User
 
 
 class contactForm(forms.Form):
@@ -35,3 +36,12 @@ class ReservationForm(forms.ModelForm):
             raise forms.ValidationError("We need some sleep at that time!")
         else:
             return time
+
+
+class UserForm(forms.ModelForm):
+    username=forms.CharField(widget=forms.TextInput(attrs={'class':"input--style-3", 'type':"text" ,'placeholder':"Username" ,'name':"username"}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class':"input--style-3", 'type':"password" ,'placeholder':"Password" ,'name':"password"}))
+    email=forms.EmailField(widget=forms.EmailInput(attrs={'class':"input--style-3", 'type':"email" ,'placeholder':"Email" ,'name':"email"}))
+    class Meta():
+        model = User
+        fields = ('username','password','email')

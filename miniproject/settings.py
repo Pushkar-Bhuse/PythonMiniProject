@@ -14,6 +14,7 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+TEMPLATES_DIR=os.path.join(BASE_DIR,'templates')
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -66,7 +67,7 @@ ROOT_URLCONF = 'miniproject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ["/Project/miniproject/templates"],
+        'DIRS': [TEMPLATES_DIR],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -85,22 +86,22 @@ WSGI_APPLICATION = 'miniproject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
 DATABASES = {
-    'default' : {
-        'ENGINE' : 'django.db.backends.mysql',
-        'NAME' : 'pythonproject',
-        'USER' : 'root',
-        'PASSWORD' : '',
-        'HOST' : 'localhost',
-        'PORT' : ''
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+# DATABASES = {
+#     'default' : {
+#         'ENGINE' : 'django.db.backends.mysql',
+#         'NAME' : 'pythonproject',
+#         'USER' : 'root',
+#         'PASSWORD' : '',
+#         'HOST' : 'localhost',
+#         'PORT' : ''
+#     }
+# }
 
 
 # Password validation
@@ -147,6 +148,5 @@ if DEBUG:
     STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR),"static","static-root")
     MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR),"static","media")
     STATICFILES_DIRS = (
-    os.path.join(os.path.dirname(BASE_DIR),"static","static"),
+    os.path.join(BASE_DIR,"static"),
     )
-

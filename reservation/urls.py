@@ -5,6 +5,6 @@ from reservation.views import choose_and_book,choose_location
 
 urlpatterns = [
     url(r'(?P<place>\d+)/$', choose_and_book, name='book'),
-    url(r'$', choose_location, name='choose'),
+    path('choose/', choose_location, name='choose'),
     # url(r'confirmation/$', reservations, name='reservation'),
 ]
