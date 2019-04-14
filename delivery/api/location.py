@@ -2,7 +2,11 @@ from reservation.models import Branch
 import googlemaps
 
 
+<<<<<<< HEAD
 # gmaps = googlemaps.Client(key='')
+=======
+gmaps = googlemaps.Client(key='AIzaSyBgrLgIKh5eh3TBIKuDVif9vnOjIANbstQ')
+>>>>>>> 8b6fd70a030ec301ff4112bcebec6220d0af1aa6
 
 def get_traveltime(start, end):
     my_dist = gmaps.distance_matrix(start,end)['rows'][0]['elements'][0]

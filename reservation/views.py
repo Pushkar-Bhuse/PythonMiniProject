@@ -52,15 +52,6 @@ def contact(request):
     form = contactForm(request.POST or None)
     confirm_message = None
     if form.is_valid():
-        # account_sid = "C7ad1b80e56e62edb18e0e58e298e201c"
-        # auth_token  = "10a590b0628afd4908825c2a490bc18c"
-        # client = Client(account_sid, auth_token)
-
-        # message = client.messages.create(
-        #     body= form.cleaned_data["comment"],
-        #     to="+919820598411",
-        #     from_="+919167498411",)
-        # print(message.sid)
 
         subject = "Reservation"
         name = form.cleaned_data["name"]

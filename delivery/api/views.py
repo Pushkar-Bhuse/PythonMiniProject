@@ -91,13 +91,9 @@ class ChartData(APIView):
         label = ["12:00 PM","1:00 PM","2:00 PM","3:00 PM","4:00 PM","5:00 PM","6:00 PM","7:00 PM","8:00 PM","9:00 PM","10:00 PM","11:00 PM","00:00 AM",]
         data = []
         population = {}
-        # place = request.GET["place"]
-        # for i in range(12,24):
-            # count = Reservation.objects.filter(Q(time__hour__gte = i) & Q(time__hour__lte = i+1), place__id = place).count()
-            # data.append(count)
-        count = Reservation.objects.all()
-        for entry in count:
-            data.append(entry.time)
+        for i in range(12,24):
+            count = Reservation.objects.filter(Q(time__hour__gte = i) & Q(time__hour__lte = i+1), place__id = place).count()
+            data.append(count)
         return JsonResponse({"label":label,"data":data})
 
 
