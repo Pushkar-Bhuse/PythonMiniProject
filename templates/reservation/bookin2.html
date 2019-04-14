@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 {% load static %}
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+
+
     <title>Reserve a Table</title>
 
     <!-- Font Icon -->
@@ -15,9 +20,9 @@
 </head>
 <body>
     <input type="hidden" id="place" value="{{ place }}">
-    <div class="main">
+    <div class="main" >
 
-        <div class="container">
+        <div class="container" style="background:black !important;">
             <div class="booking-content">
                 <div class="booking-image">
                     <img class="booking-img" src="{% static 'reservation/images/form-img.jpg' %}" alt="Booking Image">
@@ -28,17 +33,20 @@
                       {% csrf_token %}
                         <h2>Booking place for your dinner!</h2>
                         <div class="form-group form-input">
-                            {{ form.date }}
+                           <label for="date" >Date</label>
+                            {{form.date}}
                             <!-- <input type="text" name="name" id="name" value="" required/> -->
-                            <label for="date" class="form-label">Date</label>
+
                         </div>
                         <div class="form-group form-input">
+                            <label for="phone">Your phone number</label>
                             <input type="number" name="phone" id="phone" value=""  required />
-                            <label for="phone" class="form-label">Your phone number</label>
+
                         </div>
                         <div class="form-group form-input">
+                          <label for="time" class="">Time</label>
                           {{ form.time }}
-                          <label for="time" class="form-label">Time</label>
+
                             <!-- <div class="select-list">
                                 <select name="time" id="time" required>
                                     <option value="">Time</option>
@@ -90,9 +98,18 @@
                     </form>
                 </div>
             </div>
+
         </div>
-        <canvas id="myChart"></canvas>
+
+        <br>
+        <div class="container">
+          <canvas id="myChart"></canvas>
+        </div>
+
+
     </div>
+    <!-- <script src=”https://code.jquery.com/jquery-1.12.4.js”></script>
+    <script src=”https://code.jquery.com/ui/1.12.1/jquery-ui.js”></script> -->
 
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
@@ -117,7 +134,8 @@
                                         labels: label,
                                         datasets: [{
                                             label: 'How packed are we',
-                                            backgroundColor: 'rgb(255, 99, 132)',
+                                            backgroundColor: 'rgb(0, 0, 0)',
+                                            hoverBackgroundColor:'rgb(120,45,78)',
                                             borderColor: 'rgb(255, 99, 132)',
                                             data: values
                                         }]

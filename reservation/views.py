@@ -17,9 +17,9 @@ def index(request):
     template = "reservation/index.html"
     return render(request,template)
 
-def register(request):
-    template = "reservation/register.html"
-    return render(request,template)
+# def register(request):
+#     template = "reservation/register.html"
+#     return render(request,template)
 
 
 def user_login(request):
@@ -148,7 +148,7 @@ def register(request):
             user.save()
 
             registered = True
-            return HttpResponseRedirect(reverse('index'))
+            return HttpResponseRedirect(reverse('login'))
         else:
             print(user_form.errors)
     else:
@@ -158,4 +158,3 @@ def register(request):
                           {'user_form':user_form,
 
                            'registered':registered})
-

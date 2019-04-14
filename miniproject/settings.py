@@ -50,6 +50,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'phonenumber_field',
     'chartjs',
+    'bootstrap_datepicker_plus',
+    "bootstrap4",
+    'tempus_dominus',
 ]
 
 MIDDLEWARE = [
@@ -86,22 +89,22 @@ WSGI_APPLICATION = 'miniproject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
 DATABASES = {
-    'default' : {
-        'ENGINE' : 'django.db.backends.mysql',
-        'NAME' : 'pythonproject',
-        'USER' : 'root',
-        'PASSWORD' : '',
-        'HOST' : 'localhost',
-        'PORT' : ''
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+# DATABASES = {
+#     'default' : {
+#         'ENGINE' : 'django.db.backends.mysql',
+#         'NAME' : 'pythonproject',
+#         'USER' : 'root',
+#         'PASSWORD' : '',
+#         'HOST' : 'localhost',
+#         'PORT' : ''
+#     }
+# }
 
 
 # Password validation
@@ -148,7 +151,7 @@ if DEBUG:
     STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR),"static","static-root")
     MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR),"static","media")
     STATICFILES_DIRS = (
-    os.path.join(BASE_DIR,"reservation\static"),
+    os.path.join(BASE_DIR,"reservation/static"),
     # os.path.join(BASE_DIR,"delivery\static"),
 
     )
