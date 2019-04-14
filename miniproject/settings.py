@@ -149,6 +149,7 @@ if DEBUG:
     MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR),"static","media")
     STATICFILES_DIRS = (
     os.path.join(BASE_DIR,"reservation\static"),
+    os.path.join(BASE_DIR,"delivery\static"),
     # os.path.join(BASE_DIR,"delivery\static"),
 
     )
