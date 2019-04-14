@@ -2,10 +2,6 @@ from django.db import models
 from django.conf import settings
 from phonenumber_field.modelfields import PhoneNumberField
 import googlemaps
-<<<<<<< HEAD
-
-=======
->>>>>>> 8b6fd70a030ec301ff4112bcebec6220d0af1aa6
 # gmaps = googlemaps.Client(key='')
 # from delivery.api.location import get_lat_lon
 

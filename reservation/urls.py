@@ -3,6 +3,8 @@ from django.conf import settings
 from django.urls import path, include
 from reservation.views import choose_and_book,choose_location
 
+app_name = "reservations"
+
 urlpatterns = [
     url(r'(?P<place>\d+)/$', choose_and_book, name='book'),
     path('choose/', choose_location, name='choose'),

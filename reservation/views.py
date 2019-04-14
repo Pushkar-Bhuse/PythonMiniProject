@@ -127,7 +127,7 @@ def choose_and_book(request,place=1):
     else:
         # import pdb; pdb.set_trace()
         form = ReservationForm()
-        return render(request,'reservation/booking.html',{'form':form, "place":place})
+        return render(request,'reservation/bookin2.html',{'form':form, "place":place})
 
 
 
@@ -158,4 +158,4 @@ def register(request):
                           {'user_form':user_form,
 
                            'registered':registered})
-    
+

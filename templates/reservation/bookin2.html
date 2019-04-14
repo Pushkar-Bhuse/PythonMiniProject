@@ -14,13 +14,14 @@
     <link rel="stylesheet" href="{% static 'reservation/css/style.css' %}">
 </head>
 <body>
-
+    <input type="hidden" id="place" value="{{ place }}">
     <div class="main">
 
         <div class="container">
             <div class="booking-content">
                 <div class="booking-image">
                     <img class="booking-img" src="{% static 'reservation/images/form-img.jpg' %}" alt="Booking Image">
+
                 </div>
                 <div class="booking-form">
                     <form id="booking-form" method="POST" action="">
@@ -90,11 +91,8 @@
                 </div>
             </div>
         </div>
-
+        <canvas id="myChart"></canvas>
     </div>
-    <canvas id="myChart"></canvas>
-
-
 
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
