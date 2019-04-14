@@ -1,7 +1,10 @@
 from django import forms
+import datetime
 from reservation.models import Reservation
 from django.contrib.admin import widgets
 from django.contrib.auth.models import User
+from bootstrap_datepicker_plus import DatePickerInput,TimePickerInput
+
 
 
 class contactForm(forms.Form):
@@ -11,26 +14,20 @@ class contactForm(forms.Form):
 
 
 class ReservationForm(forms.ModelForm):
-    date = forms.DateField(required = True)
-    time_widget = forms.widgets.TimeInput(attrs={'class': 'time-pick'})
+    date = forms.DateField(widget=forms.widgets.DateInput(attrs={'type': 'date'}))
+    time_widget = forms.widgets.TimeInput(attrs={'type': 'time'})
     valid_time_formats = ['%H:%M', '%I:%M%p', '%I:%M %p']
-    details = forms.CharField(label='',
-                        widget=forms.Textarea(
-                        attrs={'placeholder': "Anything we should know?",
-                            "class": "form-control"}
-                    ))
-    time = forms.TimeField(required=False, widget=time_widget, help_text='ex: 10:30AM', input_formats=valid_time_formats)
-    class Meta:
-        model = Reservation
-        fields = [
-            'date',
-            'details',
-            'time',
-            #'number'
-        ]
+    details = forms.CharField(label='',widget=forms.Textarea(attrs={'placeholder': "Anything we should know?","class": "form-control",'rows':4,'cols':53}))
+    time = forms.TimeField(required=False,help_text='ex: 10:30AM', input_formats=valid_time_formats,widget=time_widget)
+    # time = forms.TimeField(widget=TimePicker(options={'enabledHours': [9, 10, 11, 12, 13, 14, 15, 16],},attrs={'input_toggle': True,'input_group': False, },),)
+    class Meta():
+
+         model = Reservation
+         fields = ['date','details','time',]
+
 
     def clean_time(self, *args,**kwargs) :
-        import pdb; pdb.set_trace()
+        # import pdb; pdb.set_trace()
         time = self.cleaned_data.get('time')
         if (time.hour>0 and time.hour<12):
             raise forms.ValidationError("We need some sleep at that time!")
