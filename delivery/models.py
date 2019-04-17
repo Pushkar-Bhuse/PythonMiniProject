@@ -8,7 +8,11 @@ class Product(models.Model):
     description = models.CharField(max_length = 150, null = True)
     cost = models.DecimalField(max_digits=4, decimal_places=2)
     preparation_time = models.IntegerField(max_length=4)
-    course = models.CharField(max_length = 20)
+    main='mn'
+    starter='st'
+    desserts='dt'
+    food_choices=((main,'Main Course'),(starter,'Starters'),(desserts,'Desserts'))
+    course = models.CharField(max_length = 20,choices=food_choices)
 
     def __str__(self):
         return self.name

@@ -36,7 +36,10 @@ def user_login(request):
         else:
             print("Someone tried to login and failed.")
             print("They used username: {} and password: {}".format(username,password))
-            return HttpResponse("Invalid login details given")
+            message="Invalid Login Details !"
+            check=True
+            template="reservation/login.html"
+            return HttpResponse("Invalid Details")
     else:
         return render(request, 'reservation/login.html', {})
 
