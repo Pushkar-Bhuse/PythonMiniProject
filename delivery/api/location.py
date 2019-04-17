@@ -1,8 +1,18 @@
+
+import os
+# Configure settings for project
+# Need to run this before calling models from application!
+os.environ.setdefault('DJANGO_SETTINGS_MODULE','miniproject.settings')
+
+import django
+# Import settings
+django.setup()
+
 from reservation.models import Branch
 import googlemaps
 
 
-# gmaps = googlemaps.Client(key='AIzaSyBgrLgIKh5eh3TBIKuDVif9vnOjIANbstQ')
+# gmaps = googlemaps.Client()
 
 def get_traveltime(start, end):
     my_dist = gmaps.distance_matrix(start,end)['rows'][0]['elements'][0]
