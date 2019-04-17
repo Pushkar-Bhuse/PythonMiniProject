@@ -34,7 +34,7 @@ class FinalOrder(View):
             order = {}
         else:
             order = myorder[0]
-
+        # import pdb; pdb.set_trace()
         context = {'user': request.user, "myorder" : order, "tax":tax}
         return render(request, template, context)
 

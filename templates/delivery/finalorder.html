@@ -12,7 +12,7 @@
     </div>
 
     <hr>
-    {% if not myorder %}
+    {% if myorder.items.count == 0 %}
     <h1>Seems Like you aren't hungry :( </h1>
     {% else %}
     {% for item in myorder.items.all %}
@@ -22,8 +22,9 @@
         <h4><input type="text" size="1" id='{{ item.product.id }}' value='{{ item.quantity }}'class="col-xs-1 " style="margin-left: 10px"></h4>
         <button type="button" class="button btn btn-outline-danger" id="dec" style="display: inline; margin: 10px">-</button>
         <button type="button" class=" button btn btn-outline-success" id ="inc" style="display: inline; margin: 10px">+</button>
-        </div>
-    <hr>
+        <hr>
+</div>
+
     {% endfor %}
 
         </div>
@@ -42,8 +43,8 @@
                         <h4 class="col-4 center-block" style="text-align: center">{{ item.product.name }}</h3>
                         <h4 class="quantity col-4 center-block" style="text-align: center">{{ item.quantity }}</h3>
                         <h4 class="price col-4 center-block" style="text-align: center">{{ item.price }}</h3>
-                </div>
-                        <hr>
+                                <hr>
+                        </div>
                 {% endfor %}
 
                 <div class="row" style="margin: 10px">

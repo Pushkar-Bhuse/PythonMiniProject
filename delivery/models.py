@@ -22,13 +22,13 @@ class OrderItem(models.Model):
     quantity = models.IntegerField(default=False)
     date_added = models.DateTimeField(auto_now=True)
     date_ordered = models.DateTimeField(null=True)
-    price = models.DecimalField(max_digits=4, decimal_places=2, null = True)
+    price = models.DecimalField(max_digits=10, decimal_places=2, null = True)
 
     def create(self):
         self.price = self.product.cost
 
     def set_individual_price(self):
-        self.price = self.quantity*self.price
+        self.price = round(self.quantity*self.price,2)
         return
 
     def __str__(self):
@@ -41,12 +41,12 @@ class Order(models.Model):
     is_ordered = models.BooleanField(default=False)
     items = models.ManyToManyField(OrderItem, null = True)
     date_ordered = models.DateTimeField(auto_now=True)
-    total = models.DecimalField(max_digits=4, decimal_places=2, default = 0)
+    total = models.DecimalField(max_digits=10, decimal_places=2, default = 0)
 
 
 
     def set_cart_total(self):
-        number = sum([item.product.cost for item in self.items.all()])
+        number = sum([item.price for item in self.items.all()])
         self.total = round(number,2)
         return
 

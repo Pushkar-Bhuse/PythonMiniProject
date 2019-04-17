@@ -39,7 +39,7 @@ class UpdateOrder(APIView):
                     item.delete()
                     item.save()
         else:
-            temp = Product.objects.filter(id = item)
+            temp = Product.objects.filter(id = item)[0]
             obj = Order.objects.filter(is_ordered = False, owner = request.user)[0]
             for item in obj.items.all():
                 if item.product == temp:
@@ -47,7 +47,7 @@ class UpdateOrder(APIView):
                     item.set_individual_price()
                     item.save()
 
-        obj = Order.objects.get(is_ordered = False, owner = request.user)
+        obj = Order.objects.filter(is_ordered = False, owner = request.user)[0]
         obj.set_cart_total()
         obj.save()
 
@@ -81,9 +81,11 @@ class RemoveFromCart(APIView):
 
         # for product in product_list:
         temp = Product.objects.get(id = product)
-        item = OrderItem.objects.get(product = temp)
-        obj.items.remove(item)
-        item.delete()
+        # item = OrderItem.objects.get(product = temp)
+        for item in obj.items.all():
+                if item.product == temp:
+                    item.delete()
+
         obj.set_cart_total()
         obj.save()
 
