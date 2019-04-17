@@ -9,8 +9,8 @@ from reservation import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('reservations/',include('reservation.urls'),name = 'reservation'),
-    path('delivery/', include('delivery.urls'), name = 'delivery'),
+    path('reservations/',include('reservation.urls',namespace='reservation')),
+    path('delivery/', include('delivery.urls', namespace="delivery")),
     path('api/',include('delivery.api.urls'), name = 'api'),
     path('', views.index,name='index'),
     path('register/',views.register,name='register'),

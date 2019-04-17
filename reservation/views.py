@@ -6,7 +6,7 @@ from reservation.models import Reservation,Branch
 from delivery.models import *
 from reservation.forms import UserForm
 from django.contrib.auth import authenticate, login, logout
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse,HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 # from twilio.rest import Client
@@ -104,13 +104,15 @@ def choose_and_book(request,place=1):
     # place = request.POST["place"]
     form = ReservationForm(request.POST or None)
     if form.is_valid():
-        subject = "The PB Store"
+        subject = "Food Hall"
         date = form.cleaned_data["date"]
         details = form.cleaned_data["details"]
         time = form.cleaned_data["time"]
         emailFrom = settings.EMAIL_HOST_USER
         emailTo = [request.user.email]
-        message = "%s %s" %(date, time)
+        import pdb; pdb.set_trace()
+        message = "Thanks for making a reservation. Your booking for %s ,%s is confirmed." %(date, time)
+
         send_mail(subject, message, emailFrom, emailTo, fail_silently=False,)
         reservation = form.save(commit = False)
         reservation.user = request.user
@@ -121,8 +123,8 @@ def choose_and_book(request,place=1):
         title = "Thanks!"
 
         context = {"title":title, "confirm_message": confirm_message}
-        template = 'reservation/confirmation.html'
-        return render(request,template,context)
+        template = 'reservation/index.html'
+        return HttpResponseRedirect('/')
 
     else:
         # import pdb; pdb.set_trace()
@@ -156,5 +158,4 @@ def register(request):
 
     return render(request,'reservation/register.html',
                           {'user_form':user_form,
-
                            'registered':registered})

@@ -3,7 +3,7 @@ import datetime
 from reservation.models import Reservation
 from django.contrib.admin import widgets
 from django.contrib.auth.models import User
-from bootstrap_datepicker_plus import DatePickerInput,TimePickerInput
+
 
 
 

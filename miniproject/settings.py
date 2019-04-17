@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATES_DIR=os.path.join(BASE_DIR,'templates')
@@ -21,14 +22,14 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
-EMAIL_HOST_USER = "pushkar.s.bhuse@gmail.com"
-EMAIL_HOST_PASSWORD = ""
+EMAIL_HOST_USER = "djpythonproject2019"
+EMAIL_HOST_PASSWORD = "python2019"
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '6&_up-f7lx4jrmy)4svi5u*k!t^-e1%e!e#dd+2!6_9h*=l($+'
+SECRET_KEY = "6&_up-f7lx4jrmy)4svi5u*k!t^-e1%e!e#dd+2!6_9h*=l($+"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -50,9 +51,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'phonenumber_field',
     'chartjs',
-    'bootstrap_datepicker_plus',
-    "bootstrap4",
-    'tempus_dominus',
 ]
 
 MIDDLEWARE = [
@@ -80,6 +78,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
             ],
         },
+
     },
 ]
 
@@ -89,22 +88,22 @@ WSGI_APPLICATION = 'miniproject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
 # DATABASES = {
-#     'default' : {
-#         'ENGINE' : 'django.db.backends.mysql',
-#         'NAME' : 'pythonproject',
-#         'USER' : 'root',
-#         'PASSWORD' : '',
-#         'HOST' : 'localhost',
-#         'PORT' : ''
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #     }
 # }
+DATABASES = {
+    'default' : {
+        'ENGINE' : 'django.db.backends.mysql',
+        'NAME' : 'pythonproject',
+        'USER' : 'root',
+        'PASSWORD' : '',
+        'HOST' : 'localhost',
+        'PORT' : ''
+    }
+}
 
 
 # Password validation

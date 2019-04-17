@@ -1,19 +1,70 @@
 {% extends "delivery/base.html" %}
 {% load staticfiles %}
+{% load arithematic %}
 {% block content %}
 
+    <div class="card" style="margin: 10px">
+        <div class="container">
     <input type="hidden" id="user_id" value="{{ user.id }}">
-    <h1>Final Checkout</h1>
-    <hr>
-    {% for item in myorder.items.all %}
-    <div id = "{{ item.product.id }}">
-        <h3>{{ item.product.name }}</h3>
-        <h4><input type="text" id='{{ item.product.id }}' value='{{ item.quantity }}'></h4>
-        <button type="button" class=" button btn btn-outline-success" id ="inc" style="display: inline;">+</button>
-        <button type="button" class="button btn btn-outline-danger" id="dec" style="display: inline;">-</button>
+    <input type="hidden" id="tax_amount" value="{{ tax }}">
+    <div class="row">
+        <h1 class="col-4">Final Checkout</h1>
     </div>
+
+    <hr>
+    {% if not myorder %}
+    <h1>Seems Like you aren't hungry :( </h1>
+    {% else %}
+    {% for item in myorder.items.all %}
+    <div>
+        <h3>{{ item.product.name }}</h3>
+
+        <h4><input type="text" size="1" id='{{ item.product.id }}' value='{{ item.quantity }}'class="col-xs-1 " style="margin-left: 10px"></h4>
+        <button type="button" class="button btn btn-outline-danger" id="dec" style="display: inline; margin: 10px">-</button>
+        <button type="button" class=" button btn btn-outline-success" id ="inc" style="display: inline; margin: 10px">+</button>
+        </div>
     <hr>
     {% endfor %}
+
+        </div>
+    </div>
+
+    <div class="card text-white bg-dark mb-3" style="margin: 10px">
+            <div class="container">
+                <div class="card-header row" style="margin: 10px">
+                        <h3 class="col-4 center-block" style="text-align: center">Your Order</h3>
+                        <h3 class="col-4 center-block" style="text-align: center">Quantity</h3>
+                        <h3 class="col-4 center-block" style="text-align: center">Price</h3>
+                </div>
+                    <hr>
+                {% for item in myorder.items.all %}
+                <div id = "{{ item.product.id }}_cart" class="row" style="margin: 10px">
+                        <h4 class="col-4 center-block" style="text-align: center">{{ item.product.name }}</h3>
+                        <h4 class="quantity col-4 center-block" style="text-align: center">{{ item.quantity }}</h3>
+                        <h4 class="price col-4 center-block" style="text-align: center">{{ item.price }}</h3>
+                </div>
+                        <hr>
+                {% endfor %}
+
+                <div class="row" style="margin: 10px">
+                        <h3 class="col-8" style="text-align: center">Tax</h3>
+                        <h3 id="tax" class="col-4" style="text-align: center">{% get_tax myorder.total tax %}</h3>
+                </div>
+                <div class="row" style="margin: 10px">
+                                <h3 class="col-8" style="text-align: center">Total</h3>
+                                <h3 id="total" class="col-4" style="text-align: center">{% get_full_amount myorder.total tax %}</h3>
+                </div>
+
+
+            </div>
+    </div>
+    {% endif %}
+    <div class="row" id="placeorder">
+                <form action="{% url 'delivery:checkout' %}" class="col-lg-12">
+                    <button type="submit" class="btn btn-outline-success btn-lg btn-block" style="padding: 10px">Place Order</button>
+                </form>
+    </div>
+
 {% endblock content %}
 
 
@@ -21,14 +72,20 @@
 
 <script>
     $(document).ready(function(){
-                console.log("In here")
                 $(".button").on("click", function() {
                         console.log("In here")
 
                         var $button = $(this);
                         var oldValue = $button.parent().find("input").val();
-                        var id = $('#user_id').val()
-                        var item = $button.parent().find("input").attr("id")
+                        var id = $('#user_id').val();
+
+                        var item = $button.parent().find("input").attr("id");
+                        var string = "#"+item+"_cart";
+                        var price = $(string).find("h4.price").text();
+                        price = parseFloat(price);
+                        var initialprice = price/oldValue;
+
+
 
                         if ($button.text() == "+") {
                                 var newVal = parseFloat(oldValue) + 1;
@@ -41,7 +98,7 @@
                         }
                         }
                         var itemdict = JSON.stringify({ "item":item, "quantity":newVal, "id":id})
-                        console.log(item)
+                        // console.log(item)
                         $.ajax({
                         "url" : "/api/update/",
                         "type": "POST",
@@ -52,10 +109,48 @@
                         "success" : function(data){
                                 if(newVal == 0){
                                         $button.parent("div").hide()
+                                        $("#"+item+"_cart").hide()
                                 }
                                 else{
                                         $button.parent().find("input").val(newVal);
+                                        $("#"+item+"_cart").find("h4.quantity").text(newVal);
+                                        var temp = newVal*initialprice;
+                                        console.log(temp);
+                                        $("#"+item+"_cart").find("h4.price").text(temp.toFixed(2));
+
                                 }
+                                var tax_amount = $('#tax_amount').val();
+
+                                var tax = $("#tax").text();
+                                tax = parseFloat(tax);
+                                // console.log(tax);
+
+                                var total = $("#total").text();
+                                total = parseFloat(total);
+                                // console.log(total);
+                                var newtax = 0;
+                                var newtotal = 0;
+                                if(newVal>oldValue){
+                                        newtotal = total+(tax_amount*initialprice)+initialprice;
+                                        newtax = tax + (tax_amount*initialprice);
+                                        console.log(newtax);
+                                        console.log(newtotal);
+                                        $("#tax").text(newtax.toFixed(2));
+                                        $("#total").text(newtotal.toFixed(2));
+                                }
+                                else{
+                                        newtotal = total-(tax_amount*initialprice)-initialprice;
+                                        newtax = tax - (tax_amount*initialprice);
+                                        console.log(newtax);
+                                        console.log(newtotal);
+                                        $("#tax").text(newtax.toFixed(2));
+                                        $("#total").text(newtotal.toFixed(2));
+
+                                        if(newtotal==0){
+                                                $("#placeorder").hide();
+                                        }
+                                }
+
 
                         },
                         "error" : function(data){

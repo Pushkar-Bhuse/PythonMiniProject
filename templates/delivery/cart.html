@@ -24,11 +24,11 @@
                         <div id = "{{ product.id }}">
                         <h3>{{ product.name }}</h3>
                         {% if product.id in currentproducts %}
-                        <button class = "add" style="display: none">Add</button>
-                        <button class = "remove" style="display: inline">Remove</button>
+                        <button class = "add btn btn-warning"  style="display: none">Add</button>
+                        <button class="remove btn btn-danger"  style="display: inline">Remove</button>
                         {% else %}
-                        <button class = "add" style="display: inline">Add</button>
-                        <button class = "remove" style="display: none">Remove</button>
+                        <button class = "add btn btn-warning" style="display: inline">Add</button>
+                        <button class="remove btn btn-danger" style="display: none">Remove</button>
                         {% endif %}
                         </div>
                         <br>
@@ -39,11 +39,11 @@
                         <div id = "{{ product.id }}">
                         <h3>{{ product.name }}</h3>
                         {% if product.id in currentproducts %}
-                        <button class = "add" style="display: none">Add</button>
-                        <button class = "remove" style="display: inline">Remove</button>
+                        <button class = "add btn btn-warning" style="display: none">Add</button>
+                        <button class="remove btn btn-danger" style="display: inline">Remove</button>
                         {% else %}
-                        <button class = "add" style="display: inline">Add</button>
-                        <button class = "remove" style="display: none">Remove</button>
+                        <button class = "add btn btn-warning" style="display: inline">Add</button>
+                        <button class="remove btn btn-danger" style="display: none">Remove</button>
                         {% endif %}
                         </div>
                         <br>
@@ -54,11 +54,11 @@
                         <div id = "{{ product.id }}">
                         <h3>{{ product.name }}</h3>
                         {% if product.id in currentproducts %}
-                        <button class = "add" style="display: none">Add</button>
-                        <button class = "remove" style="display: inline">Remove</button>
+                        <button class = "add btn btn-warning" style="display: none">Add</button>
+                        <button class="remove btn btn-danger" style="display: inline">Remove</button>
                         {% else %}
-                        <button class = "add" style="display: inline">Add</button>
-                        <button class = "remove" style="display: none">Remove</button>
+                        <button class = "add btn btn-warning" style="display: inline">Add</button>
+                        <button class="remove btn btn-danger" style="display: none">Remove</button>
                         {% endif %}
                         </div>
                         <br>
@@ -66,7 +66,12 @@
                 </div>
                 </div>
                 </div>
-              </div>
+        </div>
+</div>
+<div class="row">
+    <form action="{% url 'delivery:finalorder' %}" class="col-lg-12">
+        <button type="submit" class="btn btn-outline-success btn-lg btn-block" style="padding: 10px">Go To Cart</button>
+    </form>
 </div>
 {% endblock content %}
 

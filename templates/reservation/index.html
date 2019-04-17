@@ -43,14 +43,14 @@
         <div class="menu-logo">
             <div class="navbar-brand">
                 {% if user.is_authenticated %}
-                <span class="navbar-caption-wrap"><a class="navbar-caption text-primary display-2" href="https://mobirise.co" style="font-family: 'Cookie', cursive; color:#FFCF9C !important;">Hi {{ user.username }}</a></span>
+                <span class="navbar-caption-wrap"><a class="navbar-caption text-primary display-2" href="#" style="font-family: 'Cookie', cursive; color:#FFCF9C !important;">Hi {{ user.username }}</a></span>
                 {% else %}
-                <span class="navbar-caption-wrap"><a class="navbar-caption text-primary display-2" href="https://mobirise.co" style="font-family: 'Cookie', cursive; color:#FFCF9C !important;">Food Hall</a></span>
+                <span class="navbar-caption-wrap"><a class="navbar-caption text-primary display-2" href="{% url 'index' %}" style="font-family: 'Cookie', cursive; color:#FFCF9C !important;">Food Hall</a></span>
                 {% endif %}
             </div>
         </div>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true"><li class="nav-item"><a class="nav-link link text-primary display-4" href="https://mobirise.co">Menu &nbsp;</a></li></ul>
+            <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true"><li class="nav-item"><a class="nav-link link text-primary display-4" href="{% url 'delivery:cart' %}">Order &nbsp;</a></li></ul>
             {% if user.is_authenticated %}
             <div class="navbar-buttons mbr-section-btn"><a class="btn btn-sm btn-secondary-outline display-4" href="{% url 'logout' %}">Logout</a></div>
             {% else %}
