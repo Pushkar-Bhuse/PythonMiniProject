@@ -36,7 +36,10 @@ def user_login(request):
         else:
             print("Someone tried to login and failed.")
             print("They used username: {} and password: {}".format(username,password))
-            return HttpResponse("Invalid login details given")
+            message="Invalid Login Details !"
+            check=True
+            template="reservation/login.html"
+            return HttpResponse("Invalid Details")
     else:
         return render(request, 'reservation/login.html', {})
 
@@ -108,10 +111,10 @@ def choose_and_book(request,place=1):
         date = form.cleaned_data["date"]
         details = form.cleaned_data["details"]
         time = form.cleaned_data["time"]
-        emailFrom = settings.EMAIL_HOST_USER
-        emailTo = [request.user.email]
-        message = "%s %s" %(date, time)
-        send_mail(subject, message, emailFrom, emailTo, fail_silently=False,)
+        # emailFrom = settings.EMAIL_HOST_USER
+        # emailTo = [request.user.email]
+        # message = "%s %s" %(date, time)
+        # send_mail(subject, message, emailFrom, emailTo, fail_silently=False,)
         reservation = form.save(commit = False)
         reservation.user = request.user
         reservation.place = Branch.objects.get(id = place)
